@@ -1,4 +1,5 @@
 # DOM-Papan-Skor-Responsive
+![index](https://user-images.githubusercontent.com/50519239/226101867-feed9993-f5d7-4c48-8408-9b2cfb82fb2f.png)
 
 Ini adalah proyek belajar Javascript DOM.
 
