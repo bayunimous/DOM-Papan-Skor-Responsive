@@ -1,11 +1,13 @@
 //inisiasi variabel
 const p1Button = document.querySelector("#p1-button");
-const p2Button = document.getElementById("p2-button");
+const p2Button = document.querySelector("#p2-button");
 const p1Display = document.querySelector("#p1-display");
 const p2Display = document.querySelector("#p2-display");
+const resetButton = document.querySelector("#reset");
+const scoreWinSelect = document.querySelector("#score-win");
 
 //point
-let scoreWin = 5;
+let scoreWin = 3;
 let isGameOver = false;
 
 //inisiasi score p1
@@ -38,6 +40,26 @@ p2Button.addEventListener("click", function () {
     }
   }
   p2Display.textContent = p2Score;
+});
+
+//reset
+function reset() {
+  isGameOver = false;
+  p1Score = 0;
+  p2Score = 0;
+  p1Display.textContent = 0;
+  p2Display.textContent = 0;
+  p1Button.disabled = false;
+  p2Button.disabled = false;
+}
+
+//event listener reset
+resetButton.addEventListener("click", reset);
+
+//event listener scoreWin
+scoreWinSelect.addEventListener("change", function () {
+  scoreWin = parseInt(this.value);
+  reset();
 });
 
 /* path */
