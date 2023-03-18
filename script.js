@@ -1,24 +1,42 @@
-//inisiasi variabel
 const p1Button = document.querySelector("#p1-button");
 const p2Button = document.querySelector("#p2-button");
+const resetButton = document.querySelector("#reset");
+const playTo = document.querySelector("#playto");
+
 const p1Display = document.querySelector("#p1-display");
 const p2Display = document.querySelector("#p2-display");
-const resetButton = document.querySelector("#reset");
-const scoreWinSelect = document.querySelector("#score-win");
 
-//point
-let scoreWin = 3;
+let p1Score = 0;
+let p2Score = 0;
+let winningScore = 0;
 let isGameOver = false;
 
-//inisiasi score p1
-let p1Score = 0;
+function disableButton() {
+  if (winningScore == 0) {
+    p1Button.setAttribute("disabled", "");
+    p2Button.setAttribute("disabled", "");
+  } else {
+    p1Button.removeAttribute("disabled");
+    p2Button.removeAttribute("disabled");
+  }
+}
 
-//event listener p1
+function reset() {
+  isGameOver = false;
+  p1Score = 0;
+  p2Score = 0;
+  p1Display.textContent = 0;
+  p2Display.textContent = 0;
+  p1Display.classList.remove("text-success");
+  p2Display.classList.remove("text-success");
+}
+
 p1Button.addEventListener("click", function () {
   if (!isGameOver) {
     p1Score += 1;
-    if (p1Score === scoreWin) {
+    if (p1Score === winningScore) {
       isGameOver = true;
+      p1Display.classList.add("text-success");
       p1Button.disabled = true;
       p2Button.disabled = true;
     }
@@ -26,40 +44,25 @@ p1Button.addEventListener("click", function () {
   }
 });
 
-//inisiasi score p2
-let p2Score = 0;
-
-//event listener p2
 p2Button.addEventListener("click", function () {
   if (!isGameOver) {
     p2Score += 1;
-    if (p2Score === scoreWin) {
+    if (p2Score === winningScore) {
       isGameOver = true;
+      p2Display.classList.add("text-success");
       p1Button.disabled = true;
       p2Button.disabled = true;
     }
+    p2Display.textContent = p2Score;
   }
-  p2Display.textContent = p2Score;
 });
 
-//reset
-function reset() {
-  isGameOver = false;
-  p1Score = 0;
-  p2Score = 0;
-  p1Display.textContent = 0;
-  p2Display.textContent = 0;
-  p1Button.disabled = false;
-  p2Button.disabled = false;
-}
-
-//event listener reset
 resetButton.addEventListener("click", reset);
 
-//event listener scoreWin
-scoreWinSelect.addEventListener("change", function () {
-  scoreWin = parseInt(this.value);
+playTo.addEventListener("change", function () {
+  winningScore = parseInt(this.value);
+  disableButton();
   reset();
 });
 
-/* path */
+disableButton();
